@@ -19,7 +19,7 @@ Manipulator.prototype = {
 		}
 	},
 	modify: function(context, spec) {
-		for (let [,m] in new Iterator(this._m)) {
+		for (let [,m] of Object.entries(this._m)) {
 			if (m.matcher.test(spec)) {
 				try {
 					for (let func of m.funcs) {

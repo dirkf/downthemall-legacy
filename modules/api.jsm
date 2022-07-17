@@ -10,7 +10,7 @@ const EXPORTED_SYMBOLS = [];
 Cu.import("chrome://dta-modules/content/glue.jsm");
 let api = require("api");
 
-for (let [k,v] in Iterator(api)) {
+for (let [k,v] of Object.entries(api)) {
 	let [_k,_v] = [k,v];
 	/* jshint -W083 */
 	Object.defineProperty(this, _k, {

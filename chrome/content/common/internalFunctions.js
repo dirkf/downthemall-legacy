@@ -17,7 +17,7 @@ var Exception = Components.Exception;
 
 Cu.import("chrome://dta-modules/content/glue.jsm", this);
 (function() {
-	for (let [k,v] in new Iterator(require("constants"))) {
+	for (let [k,v] of Object.entries(require("constants"))) {
 		Object.defineProperty(this, k, {value: v, enumerable:true});
 	}
 }).call(this);
