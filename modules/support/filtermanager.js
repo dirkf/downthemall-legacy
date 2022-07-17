@@ -616,7 +616,7 @@ class FilterManagerImpl {
 
 				// Load all
 				let all = [];
-				for (let [id, obj] in Iterator(filters)) {
+				for (let [id, obj] of Object.entries(filters)) {
 					try {
 						let f = new Filter(id);
 						f.load(obj);

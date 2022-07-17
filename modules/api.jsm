@@ -17,7 +17,7 @@ let wrap = (_k, _v) => {
 	};
 };
 
-for (let [k,v] in Iterator(api)) {
+for (let [k,v] of Object.entries(api)) {
 	let [_k,_v] = [k,v];
 	Object.defineProperty(this, _k, {
 		get: wrap(_k, _v),

@@ -24,6 +24,17 @@ function _verify(file, hashCollection, progressCallback) {
 	}
 	const stream = new Instances.FileInputStream(file, flags, 502 /* 0766*/, 0);
 
+	const getInputStreamPump = function(stream, seg_size, seg_num, flag) {
+		// see modules/glue.jsm:149 for prefix Plain to instantiate w/o init
+		let pump = new Instances.PlainInputStreamPump();
+		if (pump.init.length > 5) {
+			pump.init(stream, 0, -1, seg_size, seg_num, flag);
+		} else {
+			pump.init(stream, seg_size, seg_num, flag);
+		}
+		return pump;
+	}
+
 	return new Promise(function(resolve, reject) {
 		const listener = {
 			QueryInterface: QI([Ci.nsIStreamListener, Ci.nsIRequestObserver]),
@@ -53,7 +64,7 @@ function _verify(file, hashCollection, progressCallback) {
 				progressCallback(Math.min(completed, total));
 			}
 		};
-		let pump = new Instances.InputStreamPump(stream, 0, -1, SEGSIZE, SEGNUM, false);
+		let pump = getInputStreamPump(stream, SEGSIZE, SEGNUM, false);
 		pump.asyncRead(listener, null);
 	}.bind(this));
 }
@@ -72,8 +83,8 @@ function _multiVerify(file, hashCollection, progressCallback) {
 		log(LOG_DEBUG, "enabled OS_READAHEAD");
 	}
 	let stream = new Instances.FileInputStream(file, flags, 502 /* 0766 */, 0).QueryInterface(Ci.nsISeekableStream);
-	let partials = new Iterator(hashCollection.partials);
-	let partial = partials.next()[1];
+	let partials = hashCollection.partials[Symbol.iterator]();
+	let partial = partials.next().value[1];
 	log(LOG_DEBUG, partial.toSource());
 	let partialHash = new Instances.Hash(nsICryptoHash[partial.type]);
 	let partialPending = hashCollection.parLength;
@@ -170,8 +181,9 @@ function _multiVerify(file, hashCollection, progressCallback) {
 			}
 		};
 		let tee = new Instances.StreamListenerTee(listenerMain, po);
-		new Instances.InputStreamPump(stream, 0, -1, SEGSIZE, SEGNUM, false).asyncRead(tee, null);
-		new Instances.InputStreamPump(pi, 0, -1, SEGSIZE, SEGNUM, true).asyncRead(listenerPartials, null);
+		getInputStreamPump(stream, SEGSIZE, SEGNUM, false).asyncRead(tee, null);
+		getInputStreamPump(pi, SEGSIZE, SEGNUM, true).asyncRead(listenerPartials, null);
+
 	}.bind(this));
 }
 

@@ -2017,7 +2017,7 @@ var QueueItem = class QueueItem {
 		if (isNaN(size) || size < 0) {
 			if (log.enabled) {
 				log(LOG_ERROR, "Bug: invalid partial size!", size);
-				for (let [i,c] in Iterator(this.chunks)) {
+				for (let [i,c] of Object.entries(this.chunks)) {
 					log(LOG_DEBUG, "Chunk " + i + ": " + c);
 				}
 			}
@@ -2717,7 +2717,7 @@ var QueueItem = class QueueItem {
 		}
 		let scoreboard = "";
 		let len = this.totalSize.toString().length;
-		for (let [i,c] in Iterator(this.chunks)) {
+		for (let [i,c] of Object.entries(this.chunks)) {
 			scoreboard += i + ": " + c + "\n";
 		}
 		log(LOG_DEBUG, "scoreboard\n" + scoreboard);

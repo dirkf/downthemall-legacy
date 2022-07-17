@@ -215,7 +215,7 @@ naturalSort.strtol = function strtol(str, rv) {
 		str.toLowerCase().split(""),
 		e => e.charCodeAt(0)
 		);
-	for (let [idx,c] in new Iterator(chars)) {
+	for (let [idx,c] of Object.entries(chars)) {
 		if ((c >= 48 && c <= 57) || (base === 16 && c >= 97 && c <= 100)) {
 			continue;
 		}

@@ -688,7 +688,7 @@ var Tooltip = {
 
 			let bl = b.length;
 			for (let pass of this._ucPasses) {
-				for (var [i, chunk] in Iterator(b)) {
+				for (let [i, chunk] of Object.entries(b)) {
 					if (pass.fs) {
 						ctx.fillStyle = this._createInnerShadowGradient(ctx, cheight, pass.fs);
 					}

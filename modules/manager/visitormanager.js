@@ -400,7 +400,7 @@ class VisitorManager {
 	 *           if no timestamp found
 	 */
 	get time() {
-		for (let [,v] in new Iterator(this._visitors)) {
+		for (let [,v] of Object.entries(this._visitors)) {
 			if (v.time && v.time > 0) {
 				return v.time;
 			}
