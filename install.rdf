@@ -5,7 +5,7 @@
 		<em:id>dta@downthemall.net</em:id>
 		<em:name>DownThemAll!</em:name>
 		<em:description>The mass downloader for Firefox.</em:description>
-		<em:version>3.0.9.2</em:version>
+		<em:version>3.1.1pre</em:version>
 		<em:bootstrap>true</em:bootstrap>
 		<em:multiprocessCompatible>true</em:multiprocessCompatible>
 		<em:type>2</em:type>
@@ -19,7 +19,7 @@
 		<em:aboutURL>chrome://dta/content/about/about.xul</em:aboutURL>
 		<em:iconURL>chrome://dtaicon/content/icon.png</em:iconURL>
 		<em:icon64URL>chrome://dtaicon/content/icon64.png</em:icon64URL>
-		<em:homepageURL>http://downthemall.net/</em:homepageURL>
+		<em:homepageURL>https://github.com/dirkf/downthemall-was-legacy</em:homepageURL>
 		<em:optionsURL>chrome://dta/content/preferences/prefs.xul</em:optionsURL>
 
 		<!-- Firefox -->

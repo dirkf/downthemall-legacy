@@ -2,12 +2,14 @@
 
 Copyright (C) 2004-2007 Federico Parodi and Stefano Verna.
 Copyright (C) 2007-2013 Federico Parodi, Stefano Verna and Nils Maier.
+Copyright (C) 2013-2017 Nils Maier.
+Copyright (C) 2018-2022 DownThemAll! contributors.
 
 DownThemAll! as a whole is licensed under GPL 2.0. See the GPL file.
 
 Individual files may have additional and/or different licenses.
 See the corresponding repository files available from
-<https://code.downthemall.net/repos/>
+<https://github.com/dirkf/downthemall-was-legacy>
 Most files are licensed under the GPL/LGPL-compatible MPL 2.0, or are
 tri-licensed under a MPL 1.1/GPL 2.0/LGPL 2.1 license.
 See the MPL, GPL, LGPL files respectively.
