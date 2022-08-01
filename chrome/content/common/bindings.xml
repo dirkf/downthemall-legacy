@@ -703,15 +703,16 @@
 			<constructor><![CDATA[
 				function doAfterPaint(i) {
 					i = i || 8; // recalculate a few times here, as the bg images might be loaded asynchronously
-					window.addEventListener("MozAfterPaint", function paint() {
-						if (--i == 0) {
+					const paint = function() {
+						if (--i <= 0) {
 							window.removeEventListener("MozAfterPaint", paint, false);
 						}
 						try {
 							_rl();
 						}
 						catch (ex) {}
-					}, false);
+					};
+					window.addEventListener("MozAfterPaint", paint, false);
 				}
 
 				let _rl = this._resizeListener = this._refreshLWAuto.bind(this);

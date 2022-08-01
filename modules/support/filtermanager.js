@@ -86,7 +86,7 @@ function consolidateRegs(regs) {
 /**
  * FilterManager
  */
-// no not create DTA_Filter yourself, managed by FilterManager
+// do not create DTA_Filter yourself, managed by FilterManager
 class Filter {
 	constructor(name) {
 		this._id = name;
@@ -589,7 +589,7 @@ class FilterManagerImpl {
 				try {
 					filters = JSON.parse(decoder.decode(await OS.File.read(this._file.path)));
 					if (!filters) {
-						throw new Error ("No filters where loaded");
+						throw new Error ("No filters were loaded");
 					}
 					for (let f of Object.keys(filters)) {
 						if (!(f in this.defFilters)) {

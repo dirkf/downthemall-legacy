@@ -13,8 +13,8 @@ const _as = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
 
 class Atoms {
 	constructor(...args) {
-		for (let i = 0; i < args.length; ++i) {
-			this.getAtom(args[i]);
+		for (let arg of args) {
+			this.getAtom(args);
 		}
 	}
 	getAtom(atom) {

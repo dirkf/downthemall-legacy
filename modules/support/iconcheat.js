@@ -58,7 +58,7 @@ exports.loadWindow = (function() {
 
 	// Directory Provider we use to check the system :p
 	class CheatDirProvider {
-		construxtor() {
+		constructor() {
 			this.hasMore = false;
 		}
 		getFile(prop, persist) {

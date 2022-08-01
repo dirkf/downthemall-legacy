@@ -12,10 +12,7 @@ var IMAGE_FILTER = FilterManager.IMAGE_FILTER;
 var Prompts = require("prompts");
 
 function showBool(bool) {
-	if (bool === true || bool === "true") {
-		return "✓";
-	}
-	return "✘";
+	return (bool === true || bool === "true")? "✓": "✘";
 }
 
 var Main = {

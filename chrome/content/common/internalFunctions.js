@@ -70,13 +70,13 @@ function $(...args) {
 		return document.getElementById(args[0]);
 	}
 	let elements = [];
-	for (let i = 0, e = args.length; i < e; ++i) {
-		let element = document.getElementById(args[i]);
+	for (let arg of args) {
+		let element = document.getElementById(arg);
 		if (element) {
 			elements.push(element);
 		}
 		else {
-			log(LOG_ERROR, "requested a non-existing element: " + args[i]);
+			log(LOG_ERROR, "requested a non-existing element: " + arg);
 		}
 	}
 	return elements;

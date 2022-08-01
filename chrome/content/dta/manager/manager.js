@@ -2011,8 +2011,8 @@ var QueueItem = class QueueItem {
 
 	refreshPartialSize() {
 		let size = 0;
-		for (let i = 0, e = this.chunks.length; i < e; ++i) {
-			size += this.chunks[i].written;
+		for (let chunk of this.chunks) {
+			size += chunk.written;
 		}
 		if (isNaN(size) || size < 0) {
 			if (log.enabled) {

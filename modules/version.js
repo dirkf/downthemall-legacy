@@ -3,6 +3,7 @@
  * You can obtain one at http://mozilla.org/MPL/2.0/ */
 "use strict";
 
+// formerly, {DDC359D1-844A-42a7-9AA1-88A850A938A8}
 const ID = 'dta@downthemall.net';
 let _callbacks = [];
 
