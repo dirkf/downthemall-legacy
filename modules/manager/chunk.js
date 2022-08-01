@@ -309,12 +309,11 @@ class Chunk {
 					written = this._outStream.writeFrom(aInputStream, bytes);
 				}
 				catch (ex) {
-					if (ex.result == Cr.NS_BASE_STREAM_WOULD_BLOCK || ex == Cr.NS_BASE_STREAM_WOULD_BLOCK) {
-						// aka still nothing written
-					}
-					else {
-						throw ex;
-					}
+				    if (ex.result != Cr.NS_BASE_STREAM_WOULD_BLOCK && ex != Cr.NS_BASE_STREAM_WOULD_BLOCK) {
+				        throw ex;
+			        } /* else {
+    					// aka still nothing written
+					} */
 				}
 				// jshint +W116
 				let remain = bytes - written;
@@ -367,12 +366,12 @@ class Chunk {
 			written = this._outStream.writeFrom(instream, avail);
 		}
 		catch (ex) {
-			if (ex.result == Cr.NS_BASE_STREAM_WOULD_BLOCK || ex == Cr.NS_BASE_STREAM_WOULD_BLOCK) {
-				// nothing written
-			}
-			else {
+			if (ex.result != Cr.NS_BASE_STREAM_WOULD_BLOCK && ex != Cr.NS_BASE_STREAM_WOULD_BLOCK) {
 				throw ex;
-			}
+			} /*
+			else {
+				// nothing written
+			} */
 		}
 		// jshint +W116
 		avail -= written;

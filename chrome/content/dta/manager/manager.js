@@ -1204,7 +1204,7 @@ var Dialog = {
 					try {
 						Utils.launch(dp);
 					}
-					catch (ex){
+					catch (ex) {
 						// no-op
 					}
 				}
@@ -2120,8 +2120,12 @@ var QueueItem = class QueueItem {
 			try {
 				await OS.File.remove(file.path);
 			}
-			catch (ex if ex.becauseNoSuchFile) {
-				// no op
+			catch (ex) {
+			    if (ex.becauseNoSuchFile) {
+				    // no op
+			    } else {
+			        throw ex;
+		        }
 			}
 		}
 
@@ -2302,7 +2306,7 @@ var QueueItem = class QueueItem {
 				);
 				return;
 			}
-				
+
 			await this.setAttributes();
 			if (Prefs.finishEvent) {
 				this.customFinishEvent();
@@ -2497,8 +2501,12 @@ var QueueItem = class QueueItem {
 			try {
 				await Utils.makeDir(file.parent, Prefs.dirPermissions);
 			}
-			catch (ex if ex.becauseExists) {
-				// no op
+			catch (ex) {
+			    if (ex.becauseNoSuchFile) {
+				    // no op
+			    } else {
+			        throw ex;
+		        }
 			}
 			try {
 				if (this.totalSize === (await OS.File.stat(file.path)).size) {
@@ -2506,8 +2514,12 @@ var QueueItem = class QueueItem {
 					return;
 				}
 			}
-			catch (ex if ex.becauseNoSuchFile) {
-				// no op
+			catch (ex) {
+			    if (ex.becauseNoSuchFile) {
+				    // no op
+			    } else {
+			        throw ex;
+		        }
 			}
 			let pa = Preallocator.prealloc(
 				file,
@@ -2543,11 +2555,12 @@ var QueueItem = class QueueItem {
 		try {
 			await OS.File.remove(tmpFile.path);
 		}
-		catch (ex if ex.becauseNoSuchFile) {
-			// no op
-		}
 		catch (ex) {
-			log(LOG_ERROR, "failed to remove tmpfile: " + tmpFile.path, ex);
+		    if (ex.becauseNoSuchFile) {
+			    // no op
+		    } else {
+    			log(LOG_ERROR, "failed to remove tmpfile: " + tmpFile.path, ex);
+			}
 		}
 	}
 

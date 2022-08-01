@@ -675,15 +675,14 @@ exports.makeDir = async function(dir, perms, force) {
 		await OS.File.makeDir(dir.path, {unixMode: perms});
 		makeDirCache.set(dir.path, perms);
 	}
-	catch (ex if ex.becauseExists) {
-		// no op
-	}
-	catch (ex if ex.becauseNoSuchFile) {
-		await exports.makeDir(dir.parent, perms);
-		await exports.makeDir(dir, perms);
-	}
-	catch (ex if ex.winLastError === 3) {
-		await exports.makeDir(dir.parent, perms);
-		await exports.makeDir(dir, perms);
-	}
+	catch (ex) {
+	    if (ex.becauseExists) {
+	    	// no op
+	    } else if (ex.becauseNoSuchFile || (ex.winLastError === 3)) {
+		    await exports.makeDir(dir.parent, perms);
+		    await exports.makeDir(dir, perms);
+	    } else {
+	        throw ex;
+	    }
+    }
 };

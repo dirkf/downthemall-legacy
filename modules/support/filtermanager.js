@@ -529,8 +529,12 @@ class FilterManagerImpl {
 			try {
 				await OS.File.makeDir(this._file.parent.path, {unixMode: 0o775, ignoreExisting: true});
 			}
-			catch (ex if ex.becauseExists) {
-				// no op;
+			catch (ex) {
+				if (ex.becauseExists) {
+					// no op;
+				} else {
+					throw ex;
+				}
 			}
 			await this._saver.saveChanges();
 		}

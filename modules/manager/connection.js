@@ -473,12 +473,12 @@ Connection.prototype = {
 			}
 		}
 		catch (ex) {
-			if (ex !== NS_ERROR_BINDING_ABORTED && ex.result !== NS_ERROR_BINDING_ABORTED) {
-				log(LOG_ERROR, 'onDataAvailable', ex);
-				this.writeFailed(ex);
-				return;
-			}
-			throw ex;
+		    if (ex !== NS_ERROR_BINDING_ABORTED && ex.result !== NS_ERROR_BINDING_ABORTED) {
+    			log(LOG_ERROR, 'onDataAvailable', ex);
+	    		this.writeFailed(ex);
+    		} else {
+    		    throw ex;
+		    }
 		}
 	},
 
